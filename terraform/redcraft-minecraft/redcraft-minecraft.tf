@@ -3,18 +3,18 @@ resource "scaleway_instance_ip" "public_ip" {}
 resource "scaleway_instance_security_group" "minecraft-security-group" {
   name = "redcraft-minecraft-${var.env_name}"
 
-  inbound_default_policy  = "drop"
+  inbound_default_policy = "drop"
   outbound_default_policy = "accept"
 
   inbound_rule {
     action = "accept"
-    port   = "22"
+    port = "22"
     ip_range = "10.0.0.0/8"
   }
 
   inbound_rule {
     action = "accept"
-    port   = "25565"
+    port = "25565"
   }
 }
 
