@@ -1,6 +1,6 @@
 resource "scaleway_instance_ip" "public_ip" {}
 
-resource "scaleway_instance_security_group" "minecraft-security-group" {
+resource "scaleway_instance_security_group" "minecraft_security_group" {
   name = "redcraft-minecraft-${var.env_name}"
 
   inbound_default_policy = "drop"
@@ -24,13 +24,13 @@ data "scaleway_image" "minecraft_image" {
   name_filter = "redcraft-minecraft-*"
 }
 
-resource "scaleway_instance_volume" "minecraft-data" {
+resource "scaleway_instance_volume" "minecraft_data" {
   size_in_gb = var.attached_disk_size
   type = "b_ssd"
   name = "redcraft-minecraft-${var.env_name}-data"
 }
 
-resource "scaleway_instance_server" "minecraft-instance" {
+resource "scaleway_instance_server" "minecraft_instance" {
   type  = var.instance_type
   image = data.scaleway_image.minecraft_image.id
 
@@ -38,7 +38,7 @@ resource "scaleway_instance_server" "minecraft-instance" {
 
   ip_id = scaleway_instance_ip.public_ip.id
 
-  security_group_id = scaleway_instance_security_group.minecraft-security-group.id
+  security_group_id = scaleway_instance_security_group.minecraft_security_group.id
 
-  additional_volume_ids = [ scaleway_instance_volume.minecraft-data.id ]
+  additional_volume_ids = [ scaleway_instance_volume.minecraft_data.id ]
 }
