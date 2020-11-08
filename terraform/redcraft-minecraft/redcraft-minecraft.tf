@@ -1,4 +1,8 @@
-resource "scaleway_instance_ip" "public_ip" {}
+resource "scaleway_instance_ip" "public_ip" {
+  lifecycle {
+    prevent_destroy = true
+  }
+}
 
 resource "scaleway_instance_security_group" "minecraft_security_group" {
   name = "redcraft-minecraft-${var.env_name}"
@@ -33,6 +37,10 @@ resource "scaleway_instance_volume" "minecraft_data" {
   size_in_gb = var.attached_disk_size
   type = "b_ssd"
   name = "redcraft-minecraft-${var.env_name}-data"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "scaleway_instance_server" "minecraft_instance" {
