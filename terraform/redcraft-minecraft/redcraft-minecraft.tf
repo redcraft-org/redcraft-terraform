@@ -16,6 +16,11 @@ resource "scaleway_instance_security_group" "minecraft_security_group" {
     action = "accept"
     port = "25565"
   }
+
+  inbound_rule {
+    action = "accept"
+    port = "25580"
+  }
 }
 
 data "scaleway_image" "minecraft_image" {
