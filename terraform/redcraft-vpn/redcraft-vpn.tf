@@ -1,4 +1,8 @@
-resource "scaleway_instance_ip" "public_ip" {}
+resource "scaleway_instance_ip" "public_ip" {
+  lifecycle {
+    prevent_destroy = true
+  }
+}
 
 resource "scaleway_instance_security_group" "vpn_security_group" {
   name = "redcraft-vpn-${var.env_name}"

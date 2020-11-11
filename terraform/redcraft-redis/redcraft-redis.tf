@@ -1,4 +1,8 @@
-resource "scaleway_instance_ip" "public_ip" {}
+resource "scaleway_instance_ip" "public_ip" {
+  lifecycle {
+    prevent_destroy = true
+  }
+}
 
 resource "scaleway_instance_security_group" "redis_security_group" {
   name = "redcraft-redis-${var.env_name}"
